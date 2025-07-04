@@ -43,15 +43,25 @@ const Dashboard = () => {
   const currentAQI = getAQIData(selectedCity);
 
   const getAQILevel = (aqi: number) => {
-    if (aqi <= 50) return { level: "Good", color: "bg-green-500", textColor: "text-green-700" };
-    if (aqi <= 100) return { level: "Moderate", color: "bg-yellow-500", textColor: "text-yellow-700" };
-    if (aqi <= 150) return { level: "Unhealthy for Sensitive", color: "bg-orange-500", textColor: "text-orange-700" };
-    if (aqi <= 200) return { level: "Unhealthy", color: "bg-red-500", textColor: "text-red-700" };
-    if (aqi <= 300) return { level: "Very Unhealthy", color: "bg-purple-500", textColor: "text-purple-700" };
-    return { level: "Hazardous", color: "bg-gray-800", textColor: "text-gray-100" };
+    if (aqi <= 50) return { level: "Good", color: "bg-green-500", textColor: "text-green-700 dark:text-green-400" };
+    if (aqi <= 100) return { level: "Moderate", color: "bg-yellow-500", textColor: "text-yellow-700 dark:text-yellow-400" };
+    if (aqi <= 150) return { level: "Unhealthy for Sensitive", color: "bg-orange-500", textColor: "text-orange-700 dark:text-orange-400" };
+    if (aqi <= 200) return { level: "Unhealthy", color: "bg-red-500", textColor: "text-red-700 dark:text-red-400" };
+    if (aqi <= 300) return { level: "Very Unhealthy", color: "bg-purple-500", textColor: "text-purple-700 dark:text-purple-400" };
+    return { level: "Hazardous", color: "bg-gray-800", textColor: "text-gray-100 dark:text-gray-300" };
   };
 
   const aqiInfo = getAQILevel(currentAQI);
+
+  // Mock pollutants data
+  const pollutants = [
+    { name: "PM2.5", value: 45, unit: "μg/m³", status: "Moderate", color: "yellow" },
+    { name: "PM10", value: 89, unit: "μg/m³", status: "Unhealthy", color: "red" },
+    { name: "NO₂", value: 23, unit: "ppb", status: "Good", color: "green" },
+    { name: "SO₂", value: 12, unit: "ppb", status: "Good", color: "green" },
+    { name: "O₃", value: 67, unit: "ppb", status: "Moderate", color: "yellow" },
+    { name: "CO", value: 1.2, unit: "ppm", status: "Good", color: "green" }
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
@@ -75,7 +85,7 @@ const Dashboard = () => {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <MapPin className="h-5 w-5 text-blue-600" />
+                  <MapPin className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   <CardTitle className="text-lg dark:text-white">
                     {selectedCity.name}, {selectedCity.state}
                   </CardTitle>
@@ -91,7 +101,7 @@ const Dashboard = () => {
                   <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
                     {currentAQI}
                   </div>
-                  <div className={`text-lg font-medium ${aqiInfo.textColor} dark:text-gray-300`}>
+                  <div className={`text-lg font-medium ${aqiInfo.textColor}`}>
                     {aqiInfo.level}
                   </div>
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -153,7 +163,7 @@ const Dashboard = () => {
 
         {/* AQI Stats */}
         <div className="mb-8">
-          <AQIStats />
+          <AQIStats pollutants={pollutants} />
         </div>
 
         {/* Heat Map */}
