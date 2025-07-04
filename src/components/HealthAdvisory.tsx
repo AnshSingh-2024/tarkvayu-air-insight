@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Mask, Jogging, Schools, Purifier, Windows } from "lucide-react";
+import { Shield, Activity, School, Wind, Home } from "lucide-react";
 
 const HealthAdvisory = () => {
   const advisoryCards = [
@@ -12,7 +12,7 @@ const HealthAdvisory = () => {
       textColor: "text-green-700",
       bgColor: "bg-green-50",
       borderColor: "border-green-200",
-      icon: <Jogging className="h-8 w-8 text-green-600" />,
+      icon: <Activity className="h-8 w-8 text-green-600" />,
       title: "Great day for outdoor activities!",
       description: "Air quality is excellent. Perfect time for all outdoor activities including sports, jogging, and children's play.",
       recommendations: [
@@ -29,7 +29,7 @@ const HealthAdvisory = () => {
       textColor: "text-yellow-700",
       bgColor: "bg-yellow-50",
       borderColor: "border-yellow-200",
-      icon: <Jogging className="h-8 w-8 text-yellow-600" />,
+      icon: <Activity className="h-8 w-8 text-yellow-600" />,
       title: "Generally safe with minor precautions",
       description: "Air quality is acceptable for most people. Unusually sensitive individuals should consider limiting prolonged outdoor exertion.",
       recommendations: [
@@ -46,7 +46,7 @@ const HealthAdvisory = () => {
       textColor: "text-orange-700",
       bgColor: "bg-orange-50",
       borderColor: "border-orange-200",
-      icon: <Mask className="h-8 w-8 text-orange-600" />,
+      icon: <Shield className="h-8 w-8 text-orange-600" />,
       title: "Wear a mask, reduce outdoor activity",
       description: "Sensitive groups may experience health effects. Active children, adults, and people with respiratory disease should limit prolonged outdoor exertion.",
       recommendations: [
@@ -63,7 +63,7 @@ const HealthAdvisory = () => {
       textColor: "text-red-700",
       bgColor: "bg-red-50",
       borderColor: "border-red-200",
-      icon: <Schools className="h-8 w-8 text-red-600" />,
+      icon: <School className="h-8 w-8 text-red-600" />,
       title: "Avoid exercise outdoors",
       description: "Everyone may begin to experience health effects. Active children and adults, and people with respiratory disease should avoid prolonged outdoor exertion.",
       recommendations: [
@@ -80,7 +80,7 @@ const HealthAdvisory = () => {
       textColor: "text-purple-700",
       bgColor: "bg-purple-50",
       borderColor: "border-purple-200",
-      icon: <Purifier className="h-8 w-8 text-purple-600" />,
+      icon: <Wind className="h-8 w-8 text-purple-600" />,
       title: "Use air purifiers, stay indoors",
       description: "Health alert: everyone may experience more serious health effects. Everyone should avoid all outdoor exertion.",
       recommendations: [
@@ -97,7 +97,7 @@ const HealthAdvisory = () => {
       textColor: "text-gray-100",
       bgColor: "bg-gray-100",
       borderColor: "border-gray-400",
-      icon: <Windows className="h-8 w-8 text-gray-800" />,
+      icon: <Home className="h-8 w-8 text-gray-800" />,
       title: "Emergency conditions - stay indoors",
       description: "Health warning of emergency conditions. The entire population is more likely to be affected by serious health effects.",
       recommendations: [
@@ -174,7 +174,7 @@ const HealthAdvisory = () => {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
             <div className="flex flex-col items-center space-y-2">
               <div className="p-3 bg-orange-100 rounded-full">
-                <Mask className="h-6 w-6 text-orange-600" />
+                <Shield className="h-6 w-6 text-orange-600" />
               </div>
               <span className="text-sm font-medium">Wear Mask</span>
               <span className="text-xs text-gray-500">AQI &gt; 100</span>
@@ -182,7 +182,7 @@ const HealthAdvisory = () => {
             
             <div className="flex flex-col items-center space-y-2">
               <div className="p-3 bg-red-100 rounded-full">
-                <Jogging className="h-6 w-6 text-red-600" />
+                <Activity className="h-6 w-6 text-red-600" />
               </div>
               <span className="text-sm font-medium">Avoid Exercise</span>
               <span className="text-xs text-gray-500">AQI &gt; 150</span>
@@ -190,7 +190,7 @@ const HealthAdvisory = () => {
             
             <div className="flex flex-col items-center space-y-2">
               <div className="p-3 bg-blue-100 rounded-full">
-                <Schools className="h-6 w-6 text-blue-600" />
+                <School className="h-6 w-6 text-blue-600" />
               </div>
               <span className="text-sm font-medium">Keep Kids Indoor</span>
               <span className="text-xs text-gray-500">AQI &gt; 150</span>
@@ -198,7 +198,7 @@ const HealthAdvisory = () => {
             
             <div className="flex flex-col items-center space-y-2">
               <div className="p-3 bg-purple-100 rounded-full">
-                <Purifier className="h-6 w-6 text-purple-600" />
+                <Wind className="h-6 w-6 text-purple-600" />
               </div>
               <span className="text-sm font-medium">Use Purifier</span>
               <span className="text-xs text-gray-500">AQI &gt; 200</span>
@@ -206,7 +206,7 @@ const HealthAdvisory = () => {
             
             <div className="flex flex-col items-center space-y-2">
               <div className="p-3 bg-gray-100 rounded-full">
-                <Windows className="h-6 w-6 text-gray-600" />
+                <Home className="h-6 w-6 text-gray-600" />
               </div>
               <span className="text-sm font-medium">Close Windows</span>
               <span className="text-xs text-gray-500">AQI &gt; 100</span>
