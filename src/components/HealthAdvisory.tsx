@@ -177,7 +177,7 @@ const HealthAdvisory = () => {
                 <Mask className="h-6 w-6 text-orange-600" />
               </div>
               <span className="text-sm font-medium">Wear Mask</span>
-              <span className="text-xs text-gray-500">AQI > 100</span>
+              <span className="text-xs text-gray-500">AQI &gt; 100</span>
             </div>
             
             <div className="flex flex-col items-center space-y-2">
@@ -185,7 +185,7 @@ const HealthAdvisory = () => {
                 <Jogging className="h-6 w-6 text-red-600" />
               </div>
               <span className="text-sm font-medium">Avoid Exercise</span>
-              <span className="text-xs text-gray-500">AQI > 150</span>
+              <span className="text-xs text-gray-500">AQI &gt; 150</span>
             </div>
             
             <div className="flex flex-col items-center space-y-2">
@@ -193,7 +193,7 @@ const HealthAdvisory = () => {
                 <Schools className="h-6 w-6 text-blue-600" />
               </div>
               <span className="text-sm font-medium">Keep Kids Indoor</span>
-              <span className="text-xs text-gray-500">AQI > 150</span>
+              <span className="text-xs text-gray-500">AQI &gt; 150</span>
             </div>
             
             <div className="flex flex-col items-center space-y-2">
@@ -201,7 +201,7 @@ const HealthAdvisory = () => {
                 <Purifier className="h-6 w-6 text-purple-600" />
               </div>
               <span className="text-sm font-medium">Use Purifier</span>
-              <span className="text-xs text-gray-500">AQI > 200</span>
+              <span className="text-xs text-gray-500">AQI &gt; 200</span>
             </div>
             
             <div className="flex flex-col items-center space-y-2">
@@ -209,7 +209,7 @@ const HealthAdvisory = () => {
                 <Windows className="h-6 w-6 text-gray-600" />
               </div>
               <span className="text-sm font-medium">Close Windows</span>
-              <span className="text-xs text-gray-500">AQI > 100</span>
+              <span className="text-xs text-gray-500">AQI &gt; 100</span>
             </div>
           </div>
         </CardContent>
