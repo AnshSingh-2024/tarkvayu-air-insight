@@ -107,19 +107,19 @@ const ChatBotUI = () => {
 
   return (
     <>
-      {/* Chat Bubble Button */}
+      {/* Chat Bubble Button - Right Side */}
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 shadow-lg z-50 flex items-center justify-center"
+          className="fixed top-1/2 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 shadow-lg z-50 flex items-center justify-center transform -translate-y-1/2"
         >
           <MessageCircle className="h-6 w-6 text-white" />
         </Button>
       )}
 
-      {/* Chat Window */}
+      {/* Chat Window - Right Side Panel */}
       {isOpen && (
-        <Card className="fixed bottom-6 right-6 w-80 h-96 shadow-2xl z-50 flex flex-col">
+        <Card className="fixed top-16 right-6 bottom-6 w-80 shadow-2xl z-50 flex flex-col bg-white dark:bg-gray-800">
           {/* Header */}
           <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-t-lg">
             <div className="flex items-center space-x-2">
@@ -153,19 +153,19 @@ const ChatBotUI = () => {
                     className={`max-w-[80%] rounded-lg p-3 ${
                       message.sender === "user"
                         ? "bg-blue-500 text-white"
-                        : "bg-gray-100 text-gray-900"
+                        : "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
                     }`}
                   >
                     <div className="flex items-start space-x-2">
                       {message.sender === "bot" && (
-                        <Bot className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <Bot className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                       )}
                       <div className="text-sm whitespace-pre-wrap">
                         {message.text}
                       </div>
                     </div>
                     <div className={`text-xs mt-1 ${
-                      message.sender === "user" ? "text-blue-100" : "text-gray-500"
+                      message.sender === "user" ? "text-blue-100" : "text-gray-500 dark:text-gray-400"
                     }`}>
                       {message.timestamp.toLocaleTimeString([], { 
                         hour: '2-digit', 
@@ -178,9 +178,9 @@ const ChatBotUI = () => {
 
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+                  <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 max-w-[80%]">
                     <div className="flex items-center space-x-2">
-                      <Bot className="h-4 w-4 text-green-600" />
+                      <Bot className="h-4 w-4 text-green-600 dark:text-green-400" />
                       <div className="flex space-x-1">
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
@@ -207,7 +207,7 @@ const ChatBotUI = () => {
                       setInputMessage(action.text);
                       handleSendMessage();
                     }}
-                    className="flex items-center space-x-1 text-xs"
+                    className="flex items-center space-x-1 text-xs dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                   >
                     {action.icon}
                     <span>{action.text}</span>
@@ -218,14 +218,14 @@ const ChatBotUI = () => {
           )}
 
           {/* Input */}
-          <div className="p-4 border-t">
+          <div className="p-4 border-t dark:border-gray-600">
             <div className="flex space-x-2">
               <Input
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask about air quality..."
-                className="flex-1 text-sm"
+                className="flex-1 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 disabled={isTyping}
               />
               <Button

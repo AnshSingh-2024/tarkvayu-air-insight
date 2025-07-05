@@ -89,12 +89,12 @@ const Home = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/dashboard">
-              <Button size="lg" variant="secondary" className="bg-white/20 backdrop-blur-md border-white/30 text-white hover:bg-white/30">
+              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
                 View Dashboard
               </Button>
             </Link>
             <Link to="/forecast">
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
                 See Forecast
               </Button>
             </Link>
@@ -103,27 +103,27 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Why Choose TarkVayu?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Built specifically for India's diverse geography and climate, serving communities often overlooked by metro-focused apps.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="text-center p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl shadow-md mb-4">
+              <div key={index} className="text-center p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 border border-gray-100 dark:border-gray-600 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-white dark:bg-gray-600 rounded-2xl shadow-md mb-4">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-300">
                   {feature.description}
                 </p>
               </div>
@@ -133,49 +133,49 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-50 to-green-50">
+      <section className="py-20 bg-gradient-to-r from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="p-8">
-              <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">500+</div>
-              <div className="text-xl text-gray-700">Cities Covered</div>
-              <div className="text-gray-500">Including rural and tier-2 cities</div>
+              <div className="text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">500+</div>
+              <div className="text-xl text-gray-700 dark:text-gray-200">Cities Covered</div>
+              <div className="text-gray-500 dark:text-gray-400">Including rural and tier-2 cities</div>
             </div>
             <div className="p-8">
-              <div className="text-4xl md:text-5xl font-bold text-green-600 mb-2">24/7</div>
-              <div className="text-xl text-gray-700">Real-time Monitoring</div>
-              <div className="text-gray-500">Continuous data updates</div>
+              <div className="text-4xl md:text-5xl font-bold text-green-600 dark:text-green-400 mb-2">24/7</div>
+              <div className="text-xl text-gray-700 dark:text-gray-200">Real-time Monitoring</div>
+              <div className="text-gray-500 dark:text-gray-400">Continuous data updates</div>
             </div>
             <div className="p-8">
-              <div className="text-4xl md:text-5xl font-bold text-purple-600 mb-2">72hrs</div>
-              <div className="text-xl text-gray-700">Forecast Accuracy</div>
-              <div className="text-gray-500">AI-powered predictions</div>
+              <div className="text-4xl md:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-2">72hrs</div>
+              <div className="text-xl text-gray-700 dark:text-gray-200">Forecast Accuracy</div>
+              <div className="text-gray-500 dark:text-gray-400">AI-powered predictions</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               What Users Say
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Real feedback from real people across India
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-2xl border border-gray-100">
-                <p className="text-gray-700 mb-6 italic">
+              <div key={index} className="bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-700 p-8 rounded-2xl border border-gray-100 dark:border-gray-600">
+                <p className="text-gray-700 dark:text-gray-300 mb-6 italic">
                   "{testimonial.text}"
                 </p>
-                <div className="border-t pt-4">
-                  <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                  <div className="text-gray-500 text-sm">{testimonial.location}</div>
+                <div className="border-t dark:border-gray-600 pt-4">
+                  <div className="font-semibold text-gray-900 dark:text-white">{testimonial.name}</div>
+                  <div className="text-gray-500 dark:text-gray-400 text-sm">{testimonial.location}</div>
                 </div>
               </div>
             ))}
@@ -199,7 +199,7 @@ const Home = () => {
               </Button>
             </Link>
             <Link to="/login">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
                 Create Account
               </Button>
             </Link>
