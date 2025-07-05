@@ -2,45 +2,22 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import AQIStats from "../components/AQIStats";
 import AQIHeatMap from "../components/AQIHeatMap";
 import CitySelector from "../components/CitySelector";
-import { MapPin, Wind, Droplets, Factory } from "lucide-react";
-
-interface City {
-  name: string;
-  state: string;
-  population?: string;
-  type: "metro" | "tier1" | "tier2" | "tier3";
-}
+import LoginPopup from "../components/LoginPopup";
+import ChatBotUI from "../components/ChatBotUI";
+import { useLocation } from "../hooks/useLocation";
+import { indianCities, getAQIData } from "../data/indianCities";
+import { MapPin, Wind, Droplets, Factory, Navigation, Loader2 } from "lucide-react";
 
 const Dashboard = () => {
-  const [selectedCity, setSelectedCity] = useState<City>({
-    name: "Delhi",
-    state: "Delhi",
-    population: "3.2 Cr",
-    type: "metro"
-  });
+  const [selectedCity, setSelectedCity] = useState(indianCities[0]);
+  const [showLoginPopup, setShowLoginPopup] = useState(true);
+  const { location, loading, error, getCurrentLocation } = useLocation();
 
-  // Mock AQI data that changes based on selected city
-  const getAQIData = (city: City) => {
-    const baseAQI = {
-      "Delhi": 156,
-      "Mumbai": 98,
-      "Bangalore": 65,
-      "Chennai": 78,
-      "Kolkata": 134,
-      "Patna": 168,
-      "Varanasi": 142,
-      "Jaunpur": 178,
-      "Jhansi": 89,
-      "Siliguri": 95
-    };
-    
-    return baseAQI[city.name as keyof typeof baseAQI] || 95;
-  };
-
-  const currentAQI = getAQIData(selectedCity);
+  const currentAQI = getAQIData(selectedCity.name);
 
   const getAQILevel = (aqi: number) => {
     if (aqi <= 50) return { level: "Good", color: "bg-green-500", textColor: "text-green-700 dark:text-green-400" };
@@ -63,20 +40,81 @@ const Dashboard = () => {
     { name: "CO", value: 1.2, unit: "ppm", status: "Good", color: "green" }
   ];
 
+  const handleLocationDetected = () => {
+    if (location && location.city) {
+      const detectedCity = indianCities.find(city => 
+        city.name.toLowerCase() === location.city?.toLowerCase()
+      );
+      if (detectedCity) {
+        setSelectedCity(detectedCity);
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Real-Time AQI Dashboard
-          </h1>
-          <div className="max-w-md">
-            <CitySelector 
-              selectedCity={selectedCity} 
-              onSelectCity={setSelectedCity} 
-            />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Real-Time AQI Dashboard
+            </h1>
+            <div className="flex items-center gap-4">
+              <div className="max-w-md">
+                <CitySelector 
+                  selectedCity={selectedCity} 
+                  onSelectCity={setSelectedCity}
+                  cities={indianCities}
+                />
+              </div>
+              
+              {/* Location Detection Button */}
+              <Button
+                onClick={getCurrentLocation}
+                disabled={loading}
+                variant="outline"
+                className="flex items-center space-x-2 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
+              >
+                {loading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Navigation className="h-4 w-4" />
+                )}
+                <span>{loading ? "Detecting..." : "My Location"}</span>
+              </Button>
+            </div>
           </div>
+          
+          {/* Location Status */}
+          {location && (
+            <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  <span className="text-sm text-blue-800 dark:text-blue-300">
+                    Location detected: {location.city}, {location.state}
+                  </span>
+                </div>
+                <Button
+                  onClick={handleLocationDetected}
+                  size="sm"
+                  variant="outline"
+                  className="border-blue-300 dark:border-blue-600 text-blue-700 dark:text-blue-300"
+                >
+                  Use This Location
+                </Button>
+              </div>
+            </div>
+          )}
+          
+          {error && (
+            <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+              <span className="text-sm text-red-800 dark:text-red-300">
+                Location error: {error}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Current AQI Card */}
@@ -171,6 +209,16 @@ const Dashboard = () => {
           <AQIHeatMap />
         </div>
       </div>
+
+      {/* Login Popup */}
+      <LoginPopup 
+        isOpen={showLoginPopup}
+        onClose={() => setShowLoginPopup(false)}
+        onSkip={() => setShowLoginPopup(false)}
+      />
+
+      {/* ChatBot */}
+      <ChatBotUI />
     </div>
   );
 };

@@ -148,12 +148,12 @@ const ChatBotUI = () => {
 
   return (
     <>
-      {/* Enhanced Chat Bubble Button - Right Side */}
+      {/* Enhanced Chat Bubble Button - Bottom Right */}
       {!isOpen && (
-        <div className="fixed top-1/2 right-6 transform -translate-y-1/2 z-50">
+        <div className="fixed bottom-6 right-6 z-50">
           <Button
             onClick={() => setIsOpen(true)}
-            className="flex flex-col items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 shadow-2xl transition-all duration-300 hover:scale-105"
+            className="flex flex-col items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-white/20"
           >
             <MessageCircle className="h-6 w-6 text-white mb-1" />
             <div className="text-white text-xs font-medium text-center leading-tight">
@@ -164,9 +164,9 @@ const ChatBotUI = () => {
         </div>
       )}
 
-      {/* Chat Window - Right Side Panel */}
+      {/* Chat Window - Bottom Right Panel */}
       {isOpen && (
-        <Card className="fixed top-16 right-6 bottom-6 w-80 shadow-2xl z-50 flex flex-col bg-white dark:bg-gray-800">
+        <Card className="fixed bottom-6 right-6 w-80 h-96 shadow-2xl z-50 flex flex-col bg-white dark:bg-gray-800">
           {/* Header */}
           <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-t-lg">
             <div className="flex items-center space-x-2">
