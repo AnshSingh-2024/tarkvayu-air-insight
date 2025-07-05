@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageCircle, Send, X, Bot, User, MapPin, TrendingUp } from "lucide-react";
+import { MessageCircle, Send, X, Bot, User, MapPin, TrendingUp, Mic, MicOff } from "lucide-react";
 
 interface Message {
   id: string;
@@ -16,6 +16,7 @@ interface Message {
 
 const ChatBotUI = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
@@ -28,6 +29,7 @@ const ChatBotUI = () => {
   const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -36,6 +38,45 @@ const ChatBotUI = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Initialize speech recognition
+  useEffect(() => {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = 'en-US';
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setInputMessage(transcript);
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
+  }, []);
+
+  const startListening = () => {
+    if (recognitionRef.current) {
+      setIsListening(true);
+      recognitionRef.current.start();
+    }
+  };
+
+  const stopListening = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    }
+  };
 
   // Mock responses based on user input
   const generateBotResponse = (userMessage: string): Message => {
@@ -107,14 +148,20 @@ const ChatBotUI = () => {
 
   return (
     <>
-      {/* Chat Bubble Button - Right Side */}
+      {/* Enhanced Chat Bubble Button - Right Side */}
       {!isOpen && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="fixed top-1/2 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 shadow-lg z-50 flex items-center justify-center transform -translate-y-1/2"
-        >
-          <MessageCircle className="h-6 w-6 text-white" />
-        </Button>
+        <div className="fixed top-1/2 right-6 transform -translate-y-1/2 z-50">
+          <Button
+            onClick={() => setIsOpen(true)}
+            className="flex flex-col items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 shadow-2xl transition-all duration-300 hover:scale-105"
+          >
+            <MessageCircle className="h-6 w-6 text-white mb-1" />
+            <div className="text-white text-xs font-medium text-center leading-tight">
+              <div>Vayu:</div>
+              <div>AI Assistant</div>
+            </div>
+          </Button>
+        </div>
       )}
 
       {/* Chat Window - Right Side Panel */}
@@ -217,7 +264,7 @@ const ChatBotUI = () => {
             </div>
           )}
 
-          {/* Input */}
+          {/* Input with Voice */}
           <div className="p-4 border-t dark:border-gray-600">
             <div className="flex space-x-2">
               <Input
@@ -228,6 +275,14 @@ const ChatBotUI = () => {
                 className="flex-1 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 disabled={isTyping}
               />
+              <Button
+                onClick={isListening ? stopListening : startListening}
+                disabled={isTyping}
+                size="icon"
+                className={`${isListening ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}`}
+              >
+                {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+              </Button>
               <Button
                 onClick={handleSendMessage}
                 disabled={isTyping || inputMessage.trim() === ""}
